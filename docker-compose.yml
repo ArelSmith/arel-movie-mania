@@ -1,0 +1,15 @@
+services:
+  web:
+    container_name: movie-app
+    image: movie-app:1.0.0
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+    environment:
+      - NODE_ENV=development
+    command: yarn dev
+
+volumes:
+  node_modules: {}
