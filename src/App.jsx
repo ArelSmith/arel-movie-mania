@@ -1,12 +1,25 @@
 import NavigationBar from "./components/NavigationBar";
 import MovieCard from "./components/MovieCard";
 import { useState } from "react";
+import { searchMovie } from "./api";
 
 function App() {
   const [search, setSearch] = useState("");
+  const [results, setResults] = useState([]);
 
-  const handleSearch = (e) => {
+  const handleSearch = async (e) => {
     setSearch(e);
+    if (e.length > 0) {
+      try {
+        const query = await searchMovie(e);
+        setResults(query || []);
+      } catch (error) {
+        console.error("Failed to search movies:", error);
+        setResults([]);
+      }
+    } else {
+      setResults([]);
+    }
   };
   return (
     <>
@@ -20,7 +33,8 @@ function App() {
           placeholder="Search for movies..."
           className="border rounded-4xl px-3 py-2 w-full max-w-md"
         />
-        <MovieCard />
+        <MovieCard search={results} />
+        <p>Made with &#10084; by Arel</p>
       </div>
     </>
   );

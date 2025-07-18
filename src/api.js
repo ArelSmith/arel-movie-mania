@@ -15,7 +15,15 @@ export const getMovieList = async () => {
 };
 
 export const searchMovie = async (q) => {
-  const search = await axios.get(q);
-  console.log(q);
-  return;
+  const search = await axios.get(`${baseUrl}/search/movie`, {
+    headers: {
+      Authorization: `Bearer ${appToken}`,
+      // "Content-Type": "application/json;charset=utf-8",
+    },
+    params: {
+      query: q,
+    },
+  });
+
+  return search.data.results;
 };
