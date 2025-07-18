@@ -5,7 +5,9 @@ import { searchMovie } from "./api";
 
 function App() {
   const [search, setSearch] = useState("");
+  const [adult, setAdult] = useState(false);
   const [results, setResults] = useState([]);
+  // console.log(adult);
 
   const handleSearch = async (e) => {
     setSearch(e);
@@ -33,7 +35,17 @@ function App() {
           placeholder="Search for movies..."
           className="border rounded-4xl px-3 py-2 w-full max-w-md"
         />
-        <MovieCard search={results} />
+        <div className="flex flex-row gap-x-2">
+          <input
+            type="checkbox"
+            className="toggle"
+            onChange={() => {
+              setAdult(!adult);
+            }}
+          />
+          <p>Adult mode</p>
+        </div>
+        <MovieCard search={results} adult={adult} />
         <p>Made with &#10084; by Arel</p>
       </div>
     </>
