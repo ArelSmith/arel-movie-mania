@@ -20,11 +20,7 @@ function App() {
           placeholder="Search for movies..."
           className="border rounded-4xl px-3 py-2 w-full max-w-md"
         />
-        <div className="flex flex-row">
-          <MovieCard />
-          <MovieCard />
-          <MovieCard />
-        </div>
+        <MovieCard />
       </div>
     </>
   );
